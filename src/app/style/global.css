@@ -1,0 +1,13 @@
+body {
+  font-family: "Roboto";
+}
+
+#app {
+  margin: 30px auto;
+  max-width: 700px;
+  padding: 30px;
+}
+
+ul {
+  padding: 0;
+}
