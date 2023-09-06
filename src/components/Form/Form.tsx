@@ -54,7 +54,13 @@ const Form = () => {
         <Button type='submit' data-testid='submit-button'>
           Add
         </Button>
-        <Button onClick={() => actions.clearCompleted()} type='button'>
+        <Button
+          onClick={() => {
+            localStorageController.clearCompleted();
+            actions.clearCompleted();
+          }}
+          type='button'
+        >
           Clear completed
         </Button>
       </div>

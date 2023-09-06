@@ -2,18 +2,15 @@ import { Todo } from "./Reducer";
 
 class LocalStorageController {
   private localStorageKey = "saved-todos";
-  private todos: Todo[];
 
-  constructor() {
-    this.todos = this.storedTodos;
-  }
+  constructor() {}
 
   get storedTodos(): Todo[] {
     const todosAsString = localStorage.getItem(this.localStorageKey);
     return todosAsString ? JSON.parse(todosAsString) : [];
   }
 
-  updateTodos(todos: Todo[]) {
+  private updateTodos(todos: Todo[]) {
     localStorage.setItem(this.localStorageKey, JSON.stringify(todos));
   }
 
@@ -24,17 +21,17 @@ class LocalStorageController {
   }
 
   removeTodo(id: number) {
-    const updatedTodos = this.todos.filter((t) => t.id !== id);
+    const updatedTodos = this.storedTodos.filter((t) => t.id !== id);
     this.updateTodos(updatedTodos);
   }
 
   clearCompleted() {
-    this.updateTodos(this.todos.map((t) => ({ ...t, isDone: false })));
+    this.updateTodos(this.storedTodos.map((t) => ({ ...t, isDone: false })));
   }
 
   changeStatus(payload: { id: number; isDone: boolean }) {
     this.updateTodos(
-      this.todos.map((todo) => {
+      this.storedTodos.map((todo) => {
         if (todo.id === payload.id) {
           todo.isDone = payload.isDone;
         }
