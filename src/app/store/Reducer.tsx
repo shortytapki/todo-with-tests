@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { localStorageController } from "./LocalStorageController";
 
 export type Todo = {
   id: number;
@@ -22,7 +23,7 @@ type TodoAction =
   | Action<"CLEAR_COMPLETED", null>;
 
 export const INITIAL_STATE: StateSchema = {
-  todos: [],
+  todos: localStorageController.storedTodos,
 };
 
 export const todoReducer = (

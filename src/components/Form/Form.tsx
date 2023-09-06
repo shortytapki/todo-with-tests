@@ -3,7 +3,7 @@ import { Message } from "primereact/message";
 import { Button } from "primereact/button";
 import { useState } from "react";
 import { Todo } from "../../app/store/Reducer";
-import { useStore } from "@app";
+import { localStorageController, useStore } from "@app";
 
 const Form = () => {
   const [inputText, setInputText] = useState("");
@@ -24,6 +24,7 @@ const Form = () => {
         e.preventDefault();
         setIsSubmited(true);
         if (inputText.length > 0) {
+          localStorageController.addTodo(addingTodo);
           actions.addTodo(addingTodo);
           const input = e.currentTarget.querySelector("input");
           input!.value = "";

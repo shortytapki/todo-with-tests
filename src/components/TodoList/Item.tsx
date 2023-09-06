@@ -1,4 +1,4 @@
-import { useStore, type Todo } from "@app";
+import { useStore, type Todo, localStorageController } from "@app";
 import "./Item.css";
 
 interface ItemProps {
@@ -12,9 +12,13 @@ export const Item = ({ todo }: ItemProps) => {
     <article className='p-4 border-round-md todo flex align-items-center justify-content-between'>
       <div
         className='flex align-items-center gap-3 cursor-pointer'
-        onClick={() =>
-          actions.changeStatus({ id: todo.id, isDone: !todo.isDone })
-        }
+        onClick={() => {
+          localStorageController.changeStatus({
+            id: todo.id,
+            isDone: !todo.isDone,
+          });
+          actions.changeStatus({ id: todo.id, isDone: !todo.isDone });
+        }}
       >
         <i
           className={`pi ${
@@ -25,7 +29,10 @@ export const Item = ({ todo }: ItemProps) => {
       </div>
       <i
         className='pi pi-trash cursor-pointer scale'
-        onClick={() => actions.removeTodo(todo.id)}
+        onClick={() => {
+          localStorageController.removeTodo(todo.id);
+          actions.removeTodo(todo.id);
+        }}
       ></i>
     </article>
   );
